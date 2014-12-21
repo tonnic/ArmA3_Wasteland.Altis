@@ -31,7 +31,7 @@ tp_player_list_arg = {
   _uid
 };
 
-tp_is_player_in_list = { with parsingNamespace do {
+tp_is_player_in_list = {
   init(_uid,_this call tp_player_list_arg);
   if (isNil "_uid") exitWith {false};
 
@@ -39,7 +39,7 @@ tp_is_player_in_list = { with parsingNamespace do {
   _list = call tp_get_player_list;
 
   ((_list find _uid) >= 0)
-};} call finalizer;
+} call finalizer;
 
 tp_add_player_to_list = {
   init(_uid,_this call tp_player_list_arg);
