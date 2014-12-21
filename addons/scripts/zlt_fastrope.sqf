@@ -154,7 +154,7 @@ zlt_fnc_fastropeUnit = {
 	_unit action ["eject", _heli];
 	_unit switchmove "gunner_standup01";
 	
-	_unit setpos [(getpos _unit select 0), (getpos _unit select 1), 0 max ((getpos _unit select 2) - 3)];
+	[_unit, [(getpos _unit select 0), (getpos _unit select 1), 0 max ((getpos _unit select 2) - 3)]] call serverSetPos;
 	while {alive _unit and (getpos _unit select 2) > 1 and (abs (speed _heli)) < MAX_SPEED_WHILE_FASTROPING  and _zc > -24} do {
 		_unit attachTo [_rope, [0,0,_zc]];
 		_zc = _zc - _zdelta;

@@ -55,7 +55,7 @@ _respawnPos = markerPos (_respawnMarkers call BIS_fnc_selectRandom);
 
 if !(_respawnPos isEqualTo [0,0,0]) then
 {
-	_player setPos _respawnPos;
+	[_player, _respawnPos] call serverSetPos;
 };
 
 _player call playerSetup;

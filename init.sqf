@@ -10,6 +10,8 @@
 
 enableSaving [false, false];
 
+[] call compile preprocessFileLineNumbers "addons\tp\functions.sqf";
+
 _descExtPath = str missionConfigFile;
 currMissionDir = compileFinal str (_descExtPath select [0, count _descExtPath - 15]);
 

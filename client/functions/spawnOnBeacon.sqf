@@ -31,7 +31,7 @@ if (_preload) then { waitUntil {preloadCamera _playerPos} };
 
 waitUntil {!isNil "bis_fnc_init" && {bis_fnc_init}};
 
-player setPos _playerPos;
+[playe,  _playerPos] call serverSetPos;
 
 respawnDialogActive = false;
 player setVariable ["respawnDialogActive", false, true];

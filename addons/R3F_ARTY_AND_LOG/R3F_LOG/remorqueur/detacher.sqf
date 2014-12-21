@@ -51,7 +51,7 @@ else
 			]];
 
 			player setDir 90;
-			player setPos (getPos player);
+			[player, (getPos player)] call serverSetPos;
 			sleep 0.05;
 			detach player;
 		};

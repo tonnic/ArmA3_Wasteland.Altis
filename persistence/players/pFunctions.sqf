@@ -133,7 +133,7 @@ p_restorePosition = {
   ARGV3(0,_position,[]);
 
   if (isPOS(_position)) exitWith {
-    player setPosATL _position;
+    [player, _position, "ATL"] call serverSetPos;
   };
 
   diag_log format["WARNING: No position available. Putting player at a random safe location."];

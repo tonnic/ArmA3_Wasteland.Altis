@@ -23,7 +23,7 @@ _preload = [_this, 1, false, [false]] call BIS_fnc_param;
 
 		waitUntil {!isNil "bis_fnc_init" && {bis_fnc_init}};
 
-		player setPos _playerPos;
+		[player, _playerPos] call serverSetPos;
 	};
 } forEach (call cityList);
 
