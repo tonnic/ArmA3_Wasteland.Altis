@@ -7,7 +7,8 @@
 //	@file Created: 31/08/2013 18:19
 
 if (!isServer) exitwith {};
-#include "moneyMissionDefines.sqf";
+#include "moneyMissionDefines.sqf"
+
 
 private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
 
@@ -220,6 +221,26 @@ _failedExec = nil;
 
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 
+
+_drop_item = {
+  private["_item", "_pos"];
+  _item = _this select 0;
+  _pos = _this select 1;
+
+  if (isNil "_item" || {typeName _item != typeName [] || {count(_item) != 2}}) exitWith {};
+  if (isNil "_pos" || {typeName _pos != typeName [] || {count(_pos) != 3}}) exitWith {};
+
+  private["_id", "_class"];
+  _id = _item select 0;
+  _class = _item select 1;
+
+  private["_obj"];
+  _obj = createVehicle [_class, _pos, [], 5, "None"];
+	_obj setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+	_obj setVariable ["mf_item_id", _id, true];
+};
+
+
 _successExec =
 {
 	// Mission completed
@@ -233,7 +254,18 @@ _successExec =
 		_cash setVariable ["owner", "world", true];
 	};
 
-	_successHintMessage = "The convoy has been stopped, the money and vehicles are now yours to take.";
+	for "_i" from 1 to 8 do {
+	  private["_item"];
+	  _item = [
+	          ["lsd", "Land_WaterPurificationTablets_F"],
+	          ["marijuana", "Land_VitaminBottle_F"],
+	          ["cocaine","Land_PowderedMilk_F"],
+	          ["heroin", "Land_PainKillers_F"]
+	        ] call BIS_fnc_selectRandom;
+	  [_item, _lastPos] call _drop_item;
+	};
+
+	_successHintMessage = "The convoy has been stopped, the money, vehicles, and drugs are now yours to take.";
 };
 
 _this call moneyMissionProcessor;
